@@ -11,3 +11,6 @@ def home(request):
 
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
+
+def landing_page(request):
+    return render(request, 'blog/landing_page.html')
