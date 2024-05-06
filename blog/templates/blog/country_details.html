@@ -1,0 +1,193 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Details - Cultural Etiquette</title>
+  <style>
+    /* Reset default margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styles */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header styles */
+    header {
+      background-color: #ff6f61;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+
+    /* Search section styles */
+    .search-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .search-dropdown {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .search-button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #ff6f61;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .search-button:hover {
+      background-color: #e05e52;
+    }
+
+    /* Country details section styles */
+    .country-details {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px;
+    }
+    .country-details h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .country-details p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+    .accordion {
+      border: none;
+      background-color: transparent;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .accordion h3 {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #ff6f61;
+      color: #fff;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .accordion h3:hover {
+      background-color: #e05e52;
+    }
+    .panel {
+      display: none;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-top: none;
+      background-color: #f9f9f9;
+    }
+    .panel.active {
+      display: block;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    footer p {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Country Details - Cultural Etiquette</h1>
+  </header>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <form method="POST" action="{% url 'data_table' %}" >
+        {% csrf_token %}
+      <select class="search-dropdown" name="country">
+        <option value="" disabled selected>Select a Country</option>
+        {% for country in countries %}
+        <option value="{{ country }}">{{ country }}</option>
+        {% endfor %}
+      </select>
+      <button class="search-button" type="submit">Search</button>
+    </form>
+  </div>
+
+  <!-- Country Details Section -->
+  <div class="country-details">
+    <h2>{{selected_country}}</h2>
+    <p>
+      {{general_detail}}
+    </p>
+
+
+
+
+    <!-- Additional Features: Accordion for detailed information -->
+    <div class="accordion">
+      {% for i in country_data %}
+      <h3>{{ i.Section }}</h3>
+      <div class="panel">
+        <ul>
+            {% for detail_item in i.Detail %}
+            <div>
+                <li>{{ detail_item }}</li>
+            </div>
+            {% endfor %}
+          </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Contact us at example@example.com | Follow us on social media</p>
+    <!-- Add social media icons if needed -->
+  </footer>
+
+  <script>
+    // Add functionality for accordion
+    const accordions = document.querySelectorAll(".accordion");
+
+    accordions.forEach(accordion => {
+      const panels = accordion.querySelectorAll(".panel");
+
+      accordion.addEventListener("click", function(e) {
+        if (e.target.tagName === "H3") {
+          panels.forEach(panel => {
+            panel.classList.remove("active");
+          });
+          const panel = e.target.nextElementSibling;
+          panel.classList.add("active");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
