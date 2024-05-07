@@ -124,17 +124,17 @@
   <header>
     <h1>Discover Cultural Etiquette Around the World</h1>
     <p>Your Guide to Traveling Responsibly and Respectfully</p>
-    <a href="http://127.0.0.1:5000/data_table">Explore Now</a>
+    <a href="{% url 'data_table' %}">Explore Now</a>
   </header>
 
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Destinations</a></li>
-      <li><a href="#">Dos and Don'ts</a></li>
-      <li><a href="#">Blog</a></li>
+      <li><a href="{% url 'profile' %}">Profile</a></li>
+      <li><a href="{% url 'data_table' %}">Destinations</a></li>
+      <li><a href="#">Chatbot</a></li>
       <li><a href="#">Contact</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
     </ul>
   </nav>
 
@@ -154,8 +154,8 @@
         <p>Asia</p>
       </div>
       <div class="destination">
-        <img src="https://via.placeholder.com/300" alt="Destination 3">
-        <p>Destination 3</p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmmXo8QqYGymkZPtJP7WTSI5ejfDN7txur4Bj_O8tgCNJiGGTX8wP7GrRgQw&s" alt="Destination 3">
+        <p>Europe</p>
       </div>
     </div>
   </div>
@@ -165,17 +165,17 @@
     <h2>Testimonials</h2>
     <div class="testimonial">
       <img src="https://via.placeholder.com/150" alt="Testimonial 1">
-      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p>
+      <p>"Fantastic! Really helped me on my trip to Brazil"</p>
     </div>
     <div class="testimonial">
       <img src="https://via.placeholder.com/150" alt="Testimonial 2">
-      <p>"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+      <p>"You are an educated tourist. Thanks to this site. Kudos to the team."</p>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>Contact us at example@example.com | Follow us on social media</p>
+    <p>Contact us at culturalbridge@example.com | Follow us on social media</p>
     <!-- Add social media icons if needed -->
   </footer>
 
