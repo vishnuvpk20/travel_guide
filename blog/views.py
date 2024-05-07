@@ -7,6 +7,37 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import json
 
+from django.shortcuts import render
+from django.http import HttpResponse
+from transformers import GPT2Tokenizer, GPT2LMHeadModel
+
+# Load the pre-trained language model and tokenizer
+def load_lm_model(model_dir):
+    model = GPT2LMHeadModel.from_pretrained(model_dir)
+    tokenizer = GPT2Tokenizer.from_pretrained(model_dir)
+    return model, tokenizer
+
+# Function to generate response using the language model
+def generate_response(model, tokenizer, prompt, max_length=175):
+    input_ids = tokenizer.encode(prompt, return_tensors="pt")
+    output_ids = model.generate(input_ids, max_length=max_length, num_return_sequences=1)
+    response = tokenizer.decode(output_ids[0], skip_special_tokens=True)
+    return response
+
+# Initialize the model and tokenizer
+model, tokenizer = load_lm_model(model_dir="travel_guide/lm_model")
+
+def chatbot(request):
+    if request.method == 'POST':
+        user_input = request.POST.get('user_input', '')
+        if user_input:
+            # Generate response using the language model
+            response = generate_response(model, tokenizer, user_input)
+            return render(request, 'blog/chatbot.html', {'user_input': user_input, 'response': response})
+
+    return render(request, 'blog/chatbot.html', {'user_input': '', 'response': ''})
+
+
 
 def home(request):
     context = {

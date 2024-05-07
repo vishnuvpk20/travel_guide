@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .chat-bubble {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .response {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-links">
+        <a href="{% url 'blog-home' %}">Home</a>
+        <!-- Add more links as needed -->
+    </div>
+    <div class="chat-container">
+        <h1>Culture Chatbot </h1>
+
+        <form method="POST" action="{% url 'chatbot' %}">
+            {% csrf_token %}
+            <input type="text" name="user_input" placeholder="Ask a question...">
+            <input type="submit" value="Submit">
+        </form>
+        {% if user_input %}
+            <div class="chat-bubble">User: {{ user_input }}</div>
+        {% endif %}
+        {% if response %}
+            <div class="response">Chatbot: {{ response }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>

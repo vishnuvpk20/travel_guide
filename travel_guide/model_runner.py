@@ -7,7 +7,7 @@ def load_lm_model(model_dir):
     tokenizer = GPT2Tokenizer.from_pretrained(model_dir)
     return model, tokenizer
 
-def generate_response(model, tokenizer, prompt, max_length=50):
+def generate_response(model, tokenizer, prompt, max_length=115):
     input_ids = tokenizer.encode(prompt, return_tensors="pt")
     output_ids = model.generate(input_ids, max_length=max_length, num_return_sequences=1)
     response = tokenizer.decode(output_ids[0], skip_special_tokens=True)
@@ -18,6 +18,6 @@ def generate_response(model, tokenizer, prompt, max_length=50):
 model, tokenizer = load_lm_model(model_dir="./lm_model")
 
 # Example usage: Generate response to a prompt
-prompt = "what is the gift culture in france?"
+prompt = "what is the gift culture in Austria?"
 response = generate_response(model, tokenizer, prompt)
 print("Response:", response)

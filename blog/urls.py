@@ -7,4 +7,5 @@ urlpatterns = [
     path('about/', views.about, name='blog-about'),
     path('/landing_page', views.landing_page, name='blog-home'),
     path('data_table/', views.data_table, name='data_table'),
+    path('chatbot/', views.chatbot, name='chatbot'),
 ]
