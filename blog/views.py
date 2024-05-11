@@ -18,7 +18,7 @@ def load_lm_model(model_dir):
     return model, tokenizer
 
 # Function to generate response using the language model
-def generate_response(model, tokenizer, prompt, max_length=175):
+def generate_response(model, tokenizer, prompt, max_length=75):
     input_ids = tokenizer.encode(prompt, return_tensors="pt")
     output_ids = model.generate(input_ids, max_length=max_length, num_return_sequences=1)
     response = tokenizer.decode(output_ids[0], skip_special_tokens=True)
